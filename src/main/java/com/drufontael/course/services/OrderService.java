@@ -1,9 +1,7 @@
 package com.drufontael.course.services;
 
 import com.drufontael.course.entities.Order;
-import com.drufontael.course.entities.User;
 import com.drufontael.course.repositories.OrderRepository;
-import com.drufontael.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +11,13 @@ import java.util.Optional;
 @Service
 public class OrderService {
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderRepository repository;
     public List<Order> findAll(){
-        return orderRepository.findAll();
+        return repository.findAll();
     }
 
     public Order findById(Long id){
-        Optional<Order> obj=orderRepository.findById(id);
+        Optional<Order> obj= repository.findById(id);
         return obj.get();
     }
 }
