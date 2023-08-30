@@ -1,6 +1,7 @@
 package com.drufontael.course.entities;
 
 import com.drufontael.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -15,33 +16,34 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
     public OrderItem() {
     }
 
-    public OrderItem(Order order,Product product,Integer quantity, Double price) {
+    public OrderItem(Order order, Product product, Integer quantity, Double price) {
         this.quantity = quantity;
         this.price = price;
         this.id.setOrder(order);
         this.id.setProduct(product);
     }
 
-    public Order getOrder(){
+    @JsonIgnore
+    public Order getOrder() {
         return id.getOrder();
     }
 
-    public void setOrder(Order order){
+    public void setOrder(Order order) {
         id.setOrder(order);
     }
 
-    public Product getProduct(){
+    public Product getProduct() {
         return id.getProduct();
     }
 
-    public void setProduct(Product product){
+    public void setProduct(Product product) {
         id.setProduct(product);
     }
 
