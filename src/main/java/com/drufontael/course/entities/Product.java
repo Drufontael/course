@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "tb_product")
 public class Product implements Serializable {
     @Serial
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +20,10 @@ public class Product implements Serializable {
     private String description;
     private Double price;
     private String imgUrl;
-    @Transient
-    private Set<Category> categories=new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "tb_products_categories", joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
     public Product() {
     }
