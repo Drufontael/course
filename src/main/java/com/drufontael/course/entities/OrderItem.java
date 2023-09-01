@@ -63,4 +63,24 @@ public class OrderItem implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public double getSubTotal(){
+        return price*quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OrderItem orderItem)) return false;
+
+        if (!id.equals(orderItem.id)) return false;
+        return getQuantity() != null ? getQuantity().equals(orderItem.getQuantity()) : orderItem.getQuantity() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (getQuantity() != null ? getQuantity().hashCode() : 0);
+        return result;
+    }
 }
