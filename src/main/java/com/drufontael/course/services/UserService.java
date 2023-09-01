@@ -2,6 +2,7 @@ package com.drufontael.course.services;
 
 import com.drufontael.course.entities.User;
 import com.drufontael.course.repositories.UserRepository;
+import com.drufontael.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> obj= repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(()-> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj){
